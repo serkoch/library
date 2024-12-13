@@ -1,19 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
-  <title>Library</title>
-</head>
-<body>
-  <header>
-    <h1>The Booked</h1>
-    <p>Your own library tracker</p>
-  </header>
-  <main>
-    
-  </main>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+    <title>Library</title>
+  </head>
+  <body>
+    <header>
+      <h1>The Booked</h1>
+      <p>Your own library tracker</p>
+    </header>
+    <main>
+      <!-- dummy div-card
+      <div class="library">
+        <div class="book-card" data-lib="1">
+          <p class="card-title"></p>
+          <p class="card-author"></p>
+          <p class="card-pages"></p>
+          <label for="read"></label>
+          <input type="checkbox" name="card-read" id="card-read" value="read" />
+        </div>
+      </div> -->
+      <dialog id="favDialog">
+        <form action="">
+          <div class="quest">
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title" />
+            <label for="author">Author</label>
+            <input type="text" name="author" id="author" />
+            <label for="pages">Number of pages</label>
+            <input type="tel" name="pages" id="pages" />
+            <div>
+              <label for="read">Have you read the book?</label>
+              <input type="checkbox" name="read" id="read" value="read" />
+            </div>
+          </div>
+          <div>
+            <button value="cancel" formmethod="dialog">Cancel</button>
+            <button id="confirmBtn" value="default">Confirm</button>
+          </div>
+        </form>
+      </dialog>
+      <p>
+        <button id="showDialog">Add the book</button>
+      </p>
+      <output></output>
+    </main>
+  </body>
 </html>
