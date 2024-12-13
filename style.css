@@ -1,0 +1,145 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+header {
+  min-height: 100px;
+  background: lightcoral;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+#showDialog {
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#showDialog svg {
+  height: 40px;
+  transition: transform 250ms;
+}
+
+#showDialog svg:hover {
+  filter: invert(1);
+  transform: scale(1.25) rotate(-90deg);
+  cursor: pointer;
+}
+
+main {
+  background-color: antiquewhite;
+  width: 100%;
+  height: 100%;
+}
+
+.bookshelf {
+  display: grid;
+  grid-auto-rows: 300px;
+  grid-template-columns: repeat(auto-fit, 250px);
+  gap: 2rem;
+  width: 100%;
+  padding: 2rem;
+}
+
+.book-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem 1rem 2.5rem;
+  text-align: center;
+  border-radius: 1rem;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  background-color: hsla(0, 0%, 100%, 50%);
+  box-shadow: 1px 1px 10px hsla(0, 0%, 0%, 0.3);
+}
+
+.book-card input {
+  display: none;
+}
+
+.read-toggle {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url(assets/eye-off.svg);
+  background-color: lightcoral;
+  border-top-right-radius: 50%;
+  border: 7px solid transparent;
+}
+
+input[type="checkbox"]:checked + .read-toggle {
+  background-image: url(assets/eye-check.svg);
+  background-color: lightgreen;
+  border-top-right-radius: 50%;
+  border: 7px solid transparent;
+}
+
+input[type="checkbox"] + .read-toggle:hover,
+input[type="checkbox"]:checked + .read-toggle:hover {
+  background-image: url(assets/eye-white.svg);
+  border-top-right-radius: 50%;
+  border: 7px solid transparent;
+}
+
+.deleteBook {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 40px;
+  height: 40px;
+  border-bottom-left-radius: 50%;
+  border: 7px solid transparent;
+  background-color: wheat;
+  cursor: pointer;
+  background-image: url('assets/delete.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.deleteBook:hover {
+  background-color: lightcoral;
+  background-image: url('assets/delete-empty.svg');
+}
+
+
+
+dialog[open] {
+  margin: auto;
+  padding: 2rem;
+}
+
+::backdrop {
+  background-color: rgba(255, 255, 255, .15);
+  backdrop-filter: blur(5px);
+}
+
+
+
+footer {
+  min-height: 50px;
+  background: lightcoral;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
