@@ -12,38 +12,64 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
-function createBookCard(book) {
+function createBookCard(book, index) {
   const cardDiv = document.createElement('div');
   const cardTitle = document.createElement('p');
   cardTitle.innerText = book.title;
+
   const cardAuthor = document.createElement('p');
   cardAuthor.innerText = `by ${book.author}`;
+
   const cardPages = document.createElement('p');
   cardPages.innerText = `${book.pages} pages`;
+
   const cardRead = document.createElement('input');
   cardRead.type = 'checkbox';
-  if (book.read) {
-    cardRead.checked = true;
-  }
+  cardRead.checked = book.read;
+
   cardDiv.appendChild(cardTitle);
   cardDiv.appendChild(cardAuthor);
   cardDiv.appendChild(cardPages);
   cardDiv.appendChild(cardRead);
+
+  cardDiv.setAttribute('data-num', index);
+
+  const deleteBtn = document.createElement('button');
+  deleteBtn.innerText = 'Delete';
+  deleteBtn.classList.add('deleteBook');
+  deleteBtn.setAttribute('data-num', index);
+  cardDiv.appendChild(deleteBtn);
+
   bookshelf.appendChild(cardDiv);
-  cardDiv.setAttribute('data-num', `${myLibrary.indexOf(book)}`);
 }
 
-function initialLib() {
-  myLibrary.forEach((book) => {
-    createBookCard(book);
+function displayLib() {
+  clearLib();
+  myLibrary.forEach((book, index) => {
+    createBookCard(book, index);
+  });
+  attachDeleteListeners();
+}
+
+function attachDeleteListeners() {
+  const deleteBtns = document.querySelectorAll('.deleteBook');
+  deleteBtns.forEach((button) => {
+    button.removeEventListener('click', deleteBook);
+    button.addEventListener('click', deleteBook);
   });
 }
 
-function addToLib() {
-  createBookCard(myLibrary[myLibrary.length - 1]);
+function deleteBook(event) {
+  let num = Number(event.target.getAttribute('data-num'));
+  myLibrary.splice(num, 1);
+  displayLib();
 }
 
-initialLib();
+function clearLib() {
+  while (bookshelf.firstChild) {
+    bookshelf.removeChild(bookshelf.lastChild);
+  }
+}
 
 const showButton = document.getElementById('showDialog');
 const favDialog = document.getElementById('favDialog');
@@ -73,7 +99,9 @@ confirmBtn.addEventListener('click', (e) => {
   e.preventDefault();
   const addBook = new Book(title.value, author.value, pages.value, read.checked);
   myLibrary.push(addBook);
-  addToLib();
+  displayLib();
   favDialog.close();
   clearForm();
 });
+
+displayLib();
