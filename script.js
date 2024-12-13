@@ -14,7 +14,7 @@ function Book(title, author, pages, read) {
 
 function createBookCard(book, index) {
   const cardDiv = document.createElement('div');
-  const cardTitle = document.createElement('p');
+  const cardTitle = document.createElement('h3');
   cardTitle.innerText = book.title;
 
   const cardAuthor = document.createElement('p');
@@ -25,17 +25,25 @@ function createBookCard(book, index) {
 
   const cardRead = document.createElement('input');
   cardRead.type = 'checkbox';
+  cardRead.name = 'read';
+  cardRead.id = `card-read-${index}`;
   cardRead.checked = book.read;
+
+  const cardReadLabel = document.createElement('label');
+  cardReadLabel.htmlFor = `card-read-${index}`;
+  cardReadLabel.classList.add('read-toggle');
+
+  cardDiv.classList.add('book-card');
 
   cardDiv.appendChild(cardTitle);
   cardDiv.appendChild(cardAuthor);
   cardDiv.appendChild(cardPages);
   cardDiv.appendChild(cardRead);
+  cardDiv.appendChild(cardReadLabel);
 
   cardDiv.setAttribute('data-num', index);
 
   const deleteBtn = document.createElement('button');
-  deleteBtn.innerText = 'Delete';
   deleteBtn.classList.add('deleteBook');
   deleteBtn.setAttribute('data-num', index);
   cardDiv.appendChild(deleteBtn);
