@@ -21,7 +21,12 @@ function createBookCard(book, index) {
   cardAuthor.innerText = `by ${book.author}`;
 
   const cardPages = document.createElement('p');
-  cardPages.innerText = `${book.pages} pages`;
+  if (parseInt(book.pages) === 1) {
+    cardPages.innerText = `${book.pages} page`;
+  } else {
+    cardPages.innerText = `${book.pages} pages`;
+  }
+  cardPages.classList.add('pages');
 
   const cardRead = document.createElement('input');
   cardRead.type = 'checkbox';
@@ -85,7 +90,8 @@ const title = document.querySelector('#title');
 const author = document.querySelector('#author');
 const pages = document.querySelector('#pages');
 const read = document.querySelector('#read');
-const confirmBtn = favDialog.querySelector('#confirmBtn');
+const bookAdd = document.querySelector('#bookAdd');
+const closeDialog = document.querySelector('#close');
 
 showButton.addEventListener('click', () => {
   favDialog.showModal();
@@ -103,11 +109,17 @@ function clearForm() {
   read.checked = false;
 }
 
-confirmBtn.addEventListener('click', (e) => {
+bookAdd.addEventListener('submit', (e) => {
   e.preventDefault();
-  const addBook = new Book(title.value, author.value, pages.value, read.checked);
-  myLibrary.push(addBook);
+  const book = new Book(title.value, author.value, pages.value, read.checked);
+  myLibrary.push(book);
   displayLib();
+  favDialog.close();
+  clearForm();
+});
+
+closeDialog.addEventListener('click', (e) => {
+  e.preventDefault();
   favDialog.close();
   clearForm();
 });
