@@ -5,11 +5,13 @@ const myLibrary = [
   { title: 'Harry Potter', author: 'J.K. Rowling', pages: 300, read: true },
 ];
 
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
 }
 
 function createBookCard(book, index) {
